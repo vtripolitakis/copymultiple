@@ -1,4 +1,7 @@
 # Copymultiple
+
+### Evangelos Tripolitakis - v.tripolitakis@_NOSPAM_trp.gr
+
 This utility is a simple Go application designed to copy a single file to multiple destinations specified in a list file. This can be useful for distributing a file across different directories or for backup purposes.
 
 ## Features

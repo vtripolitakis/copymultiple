@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 )
@@ -78,7 +79,8 @@ func main() {
 
 	// check if there are enough arguments
 	if len(args) < 2 {
-		fmt.Println("Please provide two arguments.")
+		// write a better error message to print here
+		fmt.Println("Usage: ./copymultiple <file_to_copy> <destination_list_file>")
 		return
 	}
 
@@ -87,21 +89,26 @@ func main() {
 	destinationListFile := args[1]
 
 	// get the contents of the destination list file
-	fileContents, err := getFileContents(destinationListFile)
-	if err != nil {
-		fmt.Println(err)
+	destinationPathList, err := getFileContents(destinationListFile)
+	// if destinationPathList is empty array return an error message and exit
+	if len(destinationPathList) == 0 {
+		fmt.Println("Error: Destination path list file is empty")
 		return
 	}
 
-	// loop through the fileContents and copy each file
-	for _, file := range fileContents {
-		destinationPath := "/path/to/destination/" + filepath.Base(file)
-		err := CopyFile(fileToCopy, destinationPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// loop through the destination path list and copy each file
+	for _, destinationFolder := range destinationPathList {
+		err := CopyFile(fileToCopy, destinationFolder)
 		if err != nil {
-			fmt.Println("Error copying", fileToCopy, "to", destinationPath, ":", err)
+			fmt.Println("[ERROR] in copying ", fileToCopy, "to ", destinationFolder)
+			log.Fatal(err)
 			return
 		} else {
-			fmt.Println("Successfully copied", fileToCopy, "to", destinationPath)
+			fmt.Println("[SUCCESS] Copied", fileToCopy, "to", destinationFolder)
 		}
 	}
 }
