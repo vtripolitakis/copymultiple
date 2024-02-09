@@ -21,7 +21,7 @@ To use this utility, you need to pass two command-line arguments:
 - The path to the source file you want to copy.
 - The path to the text file containing a list of destination directories.
 
-`go run . [source_file_path] [destination_list_file_path]`
+`./copymultiple. [source_file_path] [destination_list_file_path]`
 
 For example:
 ```
