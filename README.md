@@ -13,7 +13,7 @@ Go (Golang) installed on your system.
 ## Installation
 No installation is required. You just need to have Go installed on your system to build the utility.
 ```
-go build
+go build -o ./copymultiple ./src
 ```
 
 ## Usage
